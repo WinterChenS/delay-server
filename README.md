@@ -24,49 +24,49 @@
 - [X] 可拓展的失败消息存储策略
 
 ## 如何使用
-1.拉取代码
+### 1.拉取代码
 ```
 git clone https://github.com/WinterChenS/delay-server.git
 ```
 
-2.修改application.properties
+### 2.修改application.properties
 
-3.编译
+### 3.编译
 
 > 以下方式选一即可
 
-3.1 普通编译
+#### 3.1 普通编译
 
 ```
 cd delay-server &&
 mvn clean package
 ```
 
-3.2 docker编译
+#### 3.2 docker编译
 
 ```
 cd delay-server &&
 mvn clean package docker:build
 ```
 
-4.运行
+### 4.运行
 
 > 运行方式选一即可
 
-4.1 普通运行
+#### 4.1 普通运行
 ```
 cd target &&
 nohup java -jar delay-server-0.0.1-SNAPSHOT.jar &
 ```
 
-4.2 docker运行
+#### 4.2 docker运行
 
 ```
 docker run -p 8088:8088 -d  winterchen/delay-server
 ```
 
 
-5.调用
+### 5.调用
 
 OkHttp
 ```java
