@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * 调用方接收到延迟消息的回调
- * @author Donghua.Chen 2020/5/19
+ * @author winterchen 2020/5/19
  */
 public class APIResponse implements Serializable {
 

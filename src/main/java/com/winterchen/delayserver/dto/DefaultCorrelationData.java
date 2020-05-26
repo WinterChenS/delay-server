@@ -3,7 +3,7 @@ package com.winterchen.delayserver.dto;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 
 /**
- * @author Donghua.Chen 2020/5/20
+ * @author winterchen 2020/5/20
  */
 public class DefaultCorrelationData extends CorrelationData {
 

@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author Donghua.Chen 2020/5/20
+ * @author winterchen 2020/5/20
  */
 @SpringBootApplication
 public class DelayServerApplication {

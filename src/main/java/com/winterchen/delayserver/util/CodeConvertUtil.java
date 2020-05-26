@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
- * @author Donghua.Chen 2020/5/20
+ * @author winterchen 2020/5/20
  */
 public class CodeConvertUtil {
 

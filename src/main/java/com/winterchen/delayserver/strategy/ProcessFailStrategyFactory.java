@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 失败消息存储策略
- * @author Donghua.Chen 2020/5/21
+ * @author winterchen 2020/5/21
  */
 public class ProcessFailStrategyFactory {
 

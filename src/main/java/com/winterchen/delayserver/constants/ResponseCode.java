@@ -2,7 +2,7 @@ package com.winterchen.delayserver.constants;
 
 /**
  * 响应码
- * @author Donghua.Chen 2020/5/19
+ * @author winterchen 2020/5/19
  */
 public enum ResponseCode {
 

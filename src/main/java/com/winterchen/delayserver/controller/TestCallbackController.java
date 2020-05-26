@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 /**
- * @author Donghua.Chen 2020/5/20
+ * @author winterchen 2020/5/20
  */
 @RestController
 @RequestMapping("/test")

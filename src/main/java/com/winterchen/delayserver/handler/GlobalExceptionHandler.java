@@ -17,7 +17,7 @@ import java.util.Map;
 
 
 /**
- * @author Donghua.Chen 2020/5/20
+ * @author winterchen 2020/5/20
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {

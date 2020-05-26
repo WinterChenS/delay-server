@@ -2,7 +2,7 @@ package com.winterchen.delayserver.constants;
 
 /**
  * redis 常量
- * @author Donghua.Chen 2020/5/19
+ * @author winterchen 2020/5/19
  */
 public interface RedisConstants {
 

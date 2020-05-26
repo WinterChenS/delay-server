@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 分布式锁
- * @author Donghua.Chen 2020/5/20
+ * @author winterchen 2020/5/20
  */
 @Component
 public class RedisLock {

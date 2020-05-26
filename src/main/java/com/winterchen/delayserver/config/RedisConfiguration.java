@@ -12,7 +12,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.io.Serializable;
 
 /**
- * @author Donghua.Chen 2020/5/19
+ * @author winterchen 2020/5/19
  */
 @Configuration
 @AutoConfigureAfter(RedisAutoConfiguration.class)

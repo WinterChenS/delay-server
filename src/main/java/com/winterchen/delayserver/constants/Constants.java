@@ -1,7 +1,7 @@
 package com.winterchen.delayserver.constants;
 
 /**
- * @author Donghua.Chen 2020/5/20
+ * @author winterchen 2020/5/20
  */
 public interface Constants {
 

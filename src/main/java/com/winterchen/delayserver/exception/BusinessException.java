@@ -3,7 +3,7 @@ package com.winterchen.delayserver.exception;
 import com.winterchen.delayserver.util.CodeConvertUtil;
 
 /**
- * @author Donghua.Chen 2020/5/20
+ * @author winterchen 2020/5/20
  */
 public class BusinessException extends RuntimeException{
 
