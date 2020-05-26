@@ -3,6 +3,8 @@
 
 ## 简介
 
+![](https://img.shields.io/badge/springboot-2.3.0-green)  ![](https://img.shields.io/badge/license-Apache%202-blue)
+
 依赖于RabiitMQ死信队列实现的延迟任务处理服务，极大的保证消息的可用
 
 ## 项目依赖
