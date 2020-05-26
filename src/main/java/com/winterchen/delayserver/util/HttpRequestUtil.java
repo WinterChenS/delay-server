@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Donghua.Chen 2020/5/20
@@ -19,7 +20,19 @@ public class HttpRequestUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpRequestUtil.class);
 
-    private static OkHttpClient client = new OkHttpClient();
+    private static OkHttpClient client;
+
+    private final static int CONNECT_TIMEOUT =20;
+    private final static int READ_TIMEOUT=15;
+    private final static int WRITE_TIMEOUT=10;
+
+    static {
+        client = new OkHttpClient.Builder()
+                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
+                .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+                .build();
+    }
 
     public static final MediaType JSON
             = MediaType.get("application/json; charset=utf-8");

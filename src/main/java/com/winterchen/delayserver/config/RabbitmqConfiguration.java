@@ -17,6 +17,7 @@ public class RabbitmqConfiguration {
     @Bean
     public RabbitTemplate rabbitTemplate(CachingConnectionFactory connectionFactory){
         connectionFactory.setPublisherReturns(true);
+        connectionFactory.setPublisherConfirms(true);
         connectionFactory.setPublisherConfirmType(CachingConnectionFactory.ConfirmType.CORRELATED);
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMandatory(true);

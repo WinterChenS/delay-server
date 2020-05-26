@@ -9,5 +9,7 @@ public interface DefaultDelayService {
 
     void pushMessage(DefaultDelayMessageDTO messageDTO);
 
-    void processAndCallback(DefaultDelayMessageDTO messageDTO) throws Exception;
+    void pushMessage(DefaultDelayMessageDTO messageDTO, Long expireTime);
+
+    void processAndCallback(DefaultDelayMessageDTO messageDTO, DefaultDelayService defaultDelayService);
 }
