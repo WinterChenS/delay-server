@@ -14,6 +14,7 @@
 - springboot 2.3.0
 - Redis
 - RabbitMQ
+- docker (可选）
 
 ## 实现功能
 
@@ -32,6 +33,8 @@ git clone https://github.com/WinterChenS/delay-server.git
 
 3.编译
 
+> 以下方式选一即可
+
 3.1 普通编译
 
 ```
@@ -48,6 +51,8 @@ mvn clean package docker:build
 
 4.运行
 
+> 运行方式选一即可
+
 4.1 普通运行
 ```
 cd target &&
@@ -57,8 +62,9 @@ nohup java -jar delay-server-0.0.1-SNAPSHOT.jar &
 4.2 docker运行
 
 ```
-docker run -p 8088:8088 springboot/delay-server
+docker run -p 8088:8088 -d  winterchen/delay-server
 ```
+
 
 5.调用
 
