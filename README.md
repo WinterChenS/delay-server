@@ -31,15 +31,33 @@ git clone https://github.com/WinterChenS/delay-server.git
 2.修改application.properties
 
 3.编译
+
+3.1 普通编译
+
 ```
 cd delay-server &&
 mvn clean package
 ```
 
+3.2 docker编译
+
+```
+cd delay-server &&
+mvn clean package docker:build
+```
+
 4.运行
+
+4.1 普通运行
 ```
 cd target &&
 nohup java -jar delay-server-0.0.1-SNAPSHOT.jar &
+```
+
+4.2 docker运行
+
+```
+docker run -p 8088:8088 springboot/delay-server
 ```
 
 5.调用

@@ -15,7 +15,8 @@
     <description>Delay Server By RabbitMq</description>
 
     <properties>
-        <java.version>1.8</java.version>
+	 <java.version>1.8</java.version>
+	 <docker.image.prefix>winterchen</docker.image.prefix>
     </properties>
 
     <dependencies>
