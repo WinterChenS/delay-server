@@ -1,0 +1,44 @@
+FROM aarch64/java:openjdk-8-jdk 
+VOLUME /tmp
+VOLUME /log
+ENV SERVER_PORT 8088
+ENV SPRING_RABBITMQ_HOST 127.0.0.1
+ENV SPRING_RABBITMQ_PORT 5672
+ENV SPRING_RABBITMQ_USERNAME guest
+ENV SPRING_RABBITMQ_PASSWORD guest
+ENV SPRING_RABBITMQ_LISTENER_SIMPLE_ACKNOWLEDGE_MODE manual
+ENV SPRING_REDIS_HOST 127.0.0.1
+ENV SPRING_REDIS_PORT 6379
+ENV SPRING_REDIS_PASSWORD root
+ENV SPRING_REDIS_TIMEOUT 10000
+ENV SPRING_REDIS_DATABASE 0
+ENV SPRING_REDIS_LETTUCE_POOL_MAX_ACTIVE 8
+ENV SPRING_REDIS_LETTUCE_POOL_MAX_WAIT -1
+ENV SPRING_REDIS_LETTUCE_POOL_MAX_IDLE 8
+ENV SPRING_REDIS_LETTUCE_POOL_MIN_IDLE 0
+ENV COM_WINTERCHEN_FAIL_STORE_STRATEGY_CODE REDIS
+
+ENV LOG_DIR /log
+
+ENV JVM_ARGS -server -Xms512m -Xmx1024m \
+ -XX:+HeapDumpOnOutOfMemoryError \
+ -XX:HeapDumpPath=${LOG_DIR}/dump/dump-yyy.log \
+ -XX:ErrorFile=${LOG_DIR}/jvm/jvm-crash.log
+
+ENV PROPERTIES_ARGS -Dserver.port=${SERVER_PORT} -Dspring.rabbitmq.host=${SPRING_RABBITMQ_HOST} \
+-Dspring.rabbitmq.port=${SPRING_RABBITMQ_PORT} \
+-Dspring.rabbitmq.username=${SPRING_RABBITMQ_USERNAME} \
+-Dspring.rabbitmq.password=${SPRING_RABBITMQ_PASSWORD} \
+-Dspring.rabbitmq.listener.simple.acknowledge-mode=${SPRING_RABBITMQ_LISTENER_SIMPLE_ACKNOWLEDGE_MODE} \
+-Dspring.redis.host=${SPRING_REDIS_HOST} \
+-Dspring.redis.port=${SPRING_REDIS_PORT} \
+-Dspring.redis.password=${SPRING_REDIS_PASSWORD} \
+-Dspring.redis.timeout=${SPRING_REDIS_TIMEOUT} \
+-Dspring.redis.database=${SPRING_REDIS_DATABASE} \
+-Dspring.redis.lettuce.pool.max-active=${SPRING_REDIS_LETTUCE_POOL_MAX_ACTIVE} \
+-Dspring.redis.lettuce.pool.max-wait=${SPRING_REDIS_LETTUCE_POOL_MAX_WAIT} \
+-Dspring.redis.lettuce.pool.max-idle=${SPRING_REDIS_LETTUCE_POOL_MAX_IDLE} \
+-Dspring.redis.lettuce.pool.min-idle=${SPRING_REDIS_LETTUCE_POOL_MIN_IDLE} 
+
+ADD delay-server-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT java ${JVM_ARGS} -Djava.security.egd=file:/dev/./urandom  ${PROPERTIES_ARGS} -jar /app.jar
