@@ -115,7 +115,7 @@ docker run -p 8088:8088 \
 -e SPRING_REDIS_PASSWORD=root \
 -e SPRING_REDIS_TIMEOUT=10000 \
 winterchen/delay-server
-``
+```
 
 ### docker-compose
 
