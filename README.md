@@ -125,7 +125,7 @@ version: '3'
 services:
   delay-server:
     container_name: delay-server
-    image: winterchen/winterchen/delay-server
+    image: winterchen/delay-server
     ports:
       - "8088:8088"
     volumes:
