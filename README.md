@@ -3,9 +3,12 @@
 
 ## 简介
 
-![](https://img.shields.io/badge/springboot-2.3.0-green)  ![](https://img.shields.io/badge/license-Apache%202-blue)
+![](https://img.shields.io/badge/springboot-2.3.0-green)  ![](https://img.shields.io/badge/license-Apache%202-blue) ![](https://img.shields.io/badge/docker--image-1.0.0-orange)
 
 依赖于RabiitMQ死信队列实现的延迟任务处理服务，极大的保证消息的可用
+
+dockerhub镜像地址：[点击进入](https://hub.docker.com/repository/docker/winterchen/delay-server)
+
 
 ## 项目依赖
 
@@ -24,6 +27,7 @@
 - [X] 可拓展的失败消息存储策略
 
 ## 如何使用
+
 ### 1.拉取代码
 ```
 git clone https://github.com/WinterChenS/delay-server.git
@@ -93,6 +97,62 @@ message | String | 消息体（随意字符串) | 是 | {"name":"ston","message"
 callbackPath | String | 过期回调地址 | 是 | http://127.0.0.1:8088/test/success
 currentTime | Long | 当前系统时间 | 是 | 29387492384
 retryCount | Integer | 失败重试次数（默认无限重试）| 否 | 0
+
+
+## docker镜像使用
+
+### docker
+
+```
+docker run -p 8088:8088 \
+-e SERVER_PORT=8088 \
+-e SPRING_RABBITMQ_HOST=127.0.0.1 \
+-e SPRING_RABBITMQ_PORT=5672 \
+-e SPRING_RABBITMQ_USERNAME=guest \
+-e SPRING_RABBITMQ_PASSWORD=guest \
+-e SPRING_REDIS_HOST=127.0.0.1 \
+-e SPRING_REDIS_PORT=6379 \
+-e SPRING_REDIS_PASSWORD=root \
+-e SPRING_REDIS_TIMEOUT=10000 \
+winterchen/delay-server
+``
+
+### docker-compose
+
+```
+version: '3'
+
+services:
+  delay-server:
+    container_name: delay-server
+    image: winterchen/winterchen/delay-server
+    ports:
+      - "8088:8088"
+    volumes:
+      - "./delay/log:/log"
+    environment:
+      SERVER_PORT: 8088
+      SPRING_RABBITMQ_HOST: 192_168_133_134
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: GUEST
+      SPRING_RABBITMQ_PASSWORD: AKSD!KJDSKD12
+      SPRING_RABBITMQ_LISTENER_SIMPLE_ACKNOWLEDGE-MODE: MANUAL
+      SPRING_REDIS_HOST: 192_168_133_134
+      SPRING_REDIS_PORT: 6379
+      SPRING_REDIS_PASSWORD: ROOT
+      SPRING_REDIS_TIMEOUT: 10000
+      SPRING_REDIS_DATABASE: 0
+      SPRING_REDIS_LETTUCE_POOL_MAX_ACTIVE: 8
+      SPRING_REDIS_LETTUCE_POOL_MAX_WAIT: -1
+      SPRING_REDIS_LETTUCE_POOL_MAX_IDLE: 8
+      SPRING_REDIS_LETTUCE_POOL_MIN_IDLE: 0
+      COM_WINTERCHEN_FAIL_STORE_STRATEGY_CODE: REDIS
+```
+
+### 拓展
+
+该服务支持arrch64，点击即可获取详细使用方法
+[点击进入](https://hub.docker.com/repository/docker/winterchen/delay-server-arrch64)
 
 ## 使用注意事项
 
