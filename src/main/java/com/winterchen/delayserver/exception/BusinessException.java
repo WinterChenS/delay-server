@@ -7,6 +7,10 @@ import com.winterchen.delayserver.util.CodeConvertUtil;
  */
 public class BusinessException extends RuntimeException{
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     private String errorCode;
 
     public BusinessException() {
@@ -14,7 +18,6 @@ public class BusinessException extends RuntimeException{
 
     public BusinessException(String errorCode) {
         super(CodeConvertUtil.convertCodeToMsg(errorCode));
-        String msg = CodeConvertUtil.convertCodeToMsg(errorCode);
         this.errorCode = errorCode;
     }
 

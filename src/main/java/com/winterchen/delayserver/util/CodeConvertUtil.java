@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -37,7 +38,8 @@ public class CodeConvertUtil {
     }
 
     public static String convertCodeToMsg(String code) {
-        return codeMsg.get(code);
+        String result = codeMsg.get(code);
+        return StringUtils.isEmpty(result) ? code : result;
     }
 
 
