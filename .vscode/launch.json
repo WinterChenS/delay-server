@@ -9,6 +9,16 @@
             "name": "Debug (Launch) - DelayServerApplication",
             "request": "launch",
             "mainClass": "com.winterchen.delayserver.DelayServerApplication"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DelayServerApplication<delay-server>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.winterchen.delayserver.DelayServerApplication",
+            "projectName": "delay-server",
+            "args": ""
         }
     ]
 }

@@ -93,10 +93,12 @@ public class DefaultDelayHandler {
                 ProcessFailStrategyService processFailStrategyService = ProcessFailStrategyFactory.getByCode(stategryCode);
                 processFailStrategyService.saveOutRetryCountMessage(defaultDelayMessageDTO);
                 channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
+                redisTemplate.delete(key);
                 return false;
             }
             retryCount ++;
             redisTemplate.opsForValue().set(key, retryCount, expireTime, TimeUnit.SECONDS);
+            LOGGER.info("重试第[] 次", retryCount);
             return true;
         } else {
             redisTemplate.opsForValue().set(key, 0, expireTime, TimeUnit.SECONDS);

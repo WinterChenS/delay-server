@@ -27,7 +27,7 @@ public class DefaultMessageSender implements RabbitTemplate.ConfirmCallback, Rab
     private RabbitTemplate rabbitTemplate;
 
 
-    @Value("${com.geely.process.fail.store.strategy.code:REDIS}")
+    @Value("${com.winterchen.process.fail.store.strategy.code:REDIS}")
     private String code;
 
     @Override
