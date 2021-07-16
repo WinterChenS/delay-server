@@ -6,7 +6,7 @@ import com.winterchen.delayserver.dto.APIResponse;
 import com.winterchen.delayserver.dto.DefaultDelayMessageDTO;
 import com.winterchen.delayserver.exception.BusinessException;
 import com.winterchen.delayserver.service.DefaultDelayService;
-import com.winterchen.delayserver.service.ProcessFailStrategyService;
+import com.winterchen.delayserver.service.ProcessStrategyService;
 import com.winterchen.delayserver.util.RedisLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class DefaultDelayController {
     private DefaultDelayService defaultDelayService;
 
     @Autowired
-    private ProcessFailStrategyService processFailStrategyService;
+    private ProcessStrategyService processFailStrategyService;
 
     @Autowired
     private RedisLock redisLock;
@@ -49,6 +49,11 @@ public class DefaultDelayController {
         return APIResponse.success();
     }
 
+    @GetMapping("/list/process-wait-message")
+    public APIResponse listAllProcessWaitMessage() {
+        return APIResponse.success(processFailStrategyService.listAllProcessWaitMessage());
+    } 
+    
     @GetMapping("/list/process-failed-message")
     public APIResponse listAllProcessFailedMessage() {
         return APIResponse.success(processFailStrategyService.listAllProcessFailedMessage());

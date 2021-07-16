@@ -109,4 +109,19 @@ public class DefaultDelayMessageDTO implements Serializable {
         sb.append('}');
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof DefaultDelayMessageDTO) {
+            DefaultDelayMessageDTO other = (DefaultDelayMessageDTO) obj;
+            return this.id == other.id;
+        }
+        return super.equals(obj);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return this.id.hashCode();
+    }
 }

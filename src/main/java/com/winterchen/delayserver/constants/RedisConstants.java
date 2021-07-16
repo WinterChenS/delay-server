@@ -20,6 +20,11 @@ public interface RedisConstants {
     String DEFAULT_DELAY_PROCESS_RETRY_COUNT_PREFIX = "com.winterchen:delay:default:process:retrycount:";
 
     /**
+     * 等待处理的消息
+     */
+    String DEFAULT_SAVE_DELAY_MESSAGG_BY_WAIT_PROCESS_SET = "com:winterchen:markting:delay:default:wait:process:items";
+
+    /**
      * 处理失败的消息
      */
     String DEFAULT_SAVE_DELAY_MESSAGG_BY_PROCESS_FAILED_SET = "com:winterchen:markting:delay:default:failed:process:items";

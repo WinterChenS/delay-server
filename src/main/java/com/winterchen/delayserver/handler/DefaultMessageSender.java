@@ -2,8 +2,8 @@ package com.winterchen.delayserver.handler;
 
 import com.winterchen.delayserver.dto.DefaultCorrelationData;
 import com.winterchen.delayserver.dto.DefaultDelayMessageDTO;
-import com.winterchen.delayserver.service.ProcessFailStrategyService;
-import com.winterchen.delayserver.strategy.ProcessFailStrategyFactory;
+import com.winterchen.delayserver.service.ProcessStrategyService;
+import com.winterchen.delayserver.strategy.ProcessStrategyFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
@@ -49,7 +49,7 @@ public class DefaultMessageSender implements RabbitTemplate.ConfirmCallback, Rab
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
         LOGGER.error("消息丢失: message({}),replyCode({}),replytext({}),exchange({}),routingKey({})",message,replyCode,replyText,exchange,routingKey);
-        ProcessFailStrategyService processFailStrategyService = ProcessFailStrategyFactory.getByCode(code);
+        ProcessStrategyService processFailStrategyService = ProcessStrategyFactory.getByCode(code);
         processFailStrategyService.savePushFailedMessage(message);
     }
 

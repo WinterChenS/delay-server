@@ -6,10 +6,13 @@ import com.winterchen.delayserver.dto.APIResponse;
 import com.winterchen.delayserver.dto.DefaultDelayMessageDTO;
 import com.winterchen.delayserver.handler.DefaultMessageSender;
 import com.winterchen.delayserver.service.DefaultDelayService;
+import com.winterchen.delayserver.service.ProcessStrategyService;
+import com.winterchen.delayserver.strategy.ProcessStrategyFactory;
 import com.winterchen.delayserver.util.HttpRequestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -25,6 +28,9 @@ public class DefaultDelayServiceImpl implements DefaultDelayService {
     @Autowired
     private DefaultMessageSender defaultMessageSender;
 
+    @Value("${com.winterchen.fail.store.strategy.code:REDIS}")
+    private String stategryCode;
+
     @Override
     public void pushMessage(DefaultDelayMessageDTO messageDTO) {
 
@@ -37,7 +43,9 @@ public class DefaultDelayServiceImpl implements DefaultDelayService {
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("延迟消息投递开始");
         }
-
+        // 将消息缓存到等待处理的set中
+        ProcessStrategyService processStrategyService = ProcessStrategyFactory.getByCode(stategryCode);
+        processStrategyService.saveProcessWaitMessage(messageDTO);
         // 添加延时队列
         defaultMessageSender.sendMessage(RabbitConstants.DEFAULT_DELAY_EXCHANGE, RabbitConstants.DEFAULT_DELAY_KEY, messageDTO, expireTime);
 
@@ -56,6 +64,9 @@ public class DefaultDelayServiceImpl implements DefaultDelayService {
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("开始处理请求回调");
         }
+        //将消息从缓存等待处理set中移除
+        ProcessStrategyService processStrategyService = ProcessStrategyFactory.getByCode(stategryCode);
+        processStrategyService.deleteProcessWaitMessage(messageDTO);
         String responseStr = HttpRequestUtil.get(messageDTO.getCallbackPath());
         boolean success = true;
         if (StringUtils.isEmpty(responseStr)) {

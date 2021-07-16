@@ -5,8 +5,8 @@ import com.winterchen.delayserver.constants.RabbitConstants;
 import com.winterchen.delayserver.constants.RedisConstants;
 import com.winterchen.delayserver.dto.DefaultDelayMessageDTO;
 import com.winterchen.delayserver.service.DefaultDelayService;
-import com.winterchen.delayserver.service.ProcessFailStrategyService;
-import com.winterchen.delayserver.strategy.ProcessFailStrategyFactory;
+import com.winterchen.delayserver.service.ProcessStrategyService;
+import com.winterchen.delayserver.strategy.ProcessStrategyFactory;
 import com.winterchen.delayserver.util.RedisLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +68,7 @@ public class DefaultDelayHandler {
                 channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
             } catch (IOException ex) {
                 LOGGER.error("将消息放回队列失败, 将消息存入到redis中", e);
-                ProcessFailStrategyService processFailStrategyService = ProcessFailStrategyFactory.getByCode(stategryCode);
+                ProcessStrategyService processFailStrategyService = ProcessStrategyFactory.getByCode(stategryCode);
                 processFailStrategyService.saveProcessFailedMessage(messageDTO);
                 try {
                     channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
@@ -90,7 +90,7 @@ public class DefaultDelayHandler {
         if (retryCount != null) {
             if (defaultDelayMessageDTO.getRetryCount() <= retryCount) {
                 LOGGER.error("重试次数已达到上限，将从队列进行删除, 并将数据存入数据库");
-                ProcessFailStrategyService processFailStrategyService = ProcessFailStrategyFactory.getByCode(stategryCode);
+                ProcessStrategyService processFailStrategyService = ProcessStrategyFactory.getByCode(stategryCode);
                 processFailStrategyService.saveOutRetryCountMessage(defaultDelayMessageDTO);
                 channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
                 redisTemplate.delete(key);
