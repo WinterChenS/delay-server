@@ -43,5 +43,5 @@ ENV PROPERTIES_ARGS -Dserver.port=${SERVER_PORT} -Dspring.rabbitmq.host=${SPRING
 -Dcom.winterchen.fail.store.strategy.code=${COM_WINTERCHEN_FAIL_STORE_STRATEGY_CODE}
 
 ADD delay-server-0.0.1-SNAPSHOT.jar app.jar
-# ENTRYPOINT java ${JVM_ARGS} -Djava.security.egd=file:/dev/./urandom  ${PROPERTIES_ARGS} -jar /app.jar
-CMD ["java", "${JVM_ARGS}", "", "-Djava.security.egd=file:/dev/./urandom", "${PROPERTIES_ARGS}", "-jar", "/app.jar"]
+ENTRYPOINT java ${JVM_ARGS} -Djava.security.egd=file:/dev/./urandom  ${PROPERTIES_ARGS} -jar /app.jar
+# CMD ["java", "${JVM_ARGS}", "", "-Djava.security.egd=file:/dev/./urandom", "${PROPERTIES_ARGS}", "-jar", "/app.jar"]
