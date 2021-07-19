@@ -25,6 +25,8 @@ dockerhub镜像地址：[点击进入](https://hub.docker.com/repository/docker/
 - [X] 可定制的超时时间以及重试次数，确保消息的可靠
 - [X] 回调异常重试
 - [X] 可拓展的失败消息存储策略
+- [] 接入nacos注册中心
+- [] 提供feign接口调用
 
 ## 如何使用
 
