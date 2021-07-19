@@ -8,7 +8,7 @@ services:
       - "8088:8088"
     volumes:
       - "./delay/log:/log"
-    args:
+    environment:
       SERVER_PORT: 8088
       SPRING_RABBITMQ_HOST: 127.0.0.1
       SPRING_RABBITMQ_PORT: 5672
