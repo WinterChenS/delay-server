@@ -56,6 +56,10 @@ public class DefaultDelayHandler {
             if (checkProcessRetryCount) {
                 defaultDelayService.processAndCallback(messageDTO, defaultDelayService);
                 channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+            } else {
+                //将消息从缓存等待处理set中移除
+                ProcessStrategyService processStrategyService = ProcessStrategyFactory.getByCode(stategryCode);
+                processStrategyService.deleteProcessWaitMessage(messageDTO);
             }
         } catch (Exception e) {
             LOGGER.error("处理延迟消息失败", e);
